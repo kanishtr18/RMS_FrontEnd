@@ -1,16 +1,138 @@
-# React + Vite
+# 🏝️ Resort Management System (RMS) – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React-based frontend for the Resort Management System (RMS).
 
-Currently, two official plugins are available:
+This project is built using:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚛️ React (Vite)
+- 🎨 Tailwind CSS v4
+- 📦 Axios (for future API integration)
+- 🧱 Component-based architecture
+- 🖥️ Role-based UI (Guest, Employee, Admin)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# 📌 Project Overview
 
-## Expanding the ESLint configuration
+The RMS Frontend provides a real-time web interface for managing resort operations including:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Room management
+- Booking management
+- Food & Beverage operations
+- Events handling
+- Employee task management
+- Reports and analytics
+- Inventory tracking
+- Support and feedback
+
+This frontend connects to the Spring Boot backend of the Resort Management System.
+
+---
+
+# 🚀 Tech Stack
+
+| Technology | Purpose |
+|------------|----------|
+| React (Vite) | UI Framework |
+| Tailwind CSS v4 | Styling |
+| JavaScript | Core language |
+| Axios | API communication (future phase) |
+
+---
+
+
+# 📂 Project Structure
+```
+RMS_Frontend/
+│
+├───public
+│    ├───vite.svg
+│
+└───src
+│   ├───App.jsx
+|   ├───main.jsx
+│   │
+│   ├───assets
+│   │   ├───react.svg
+│   │
+│   ├───components
+│   │   ├───admin/
+│   │   ├───auth/
+│   │   ├───common/
+│   │   ├───employee/
+│   │   ├───events/
+│   │   ├───guest/
+│   │   ├───layout/
+│   │   └───ui/
+│   ├───layouts
+│   ├───pages
+│   │   ├───admin/
+│   │   ├───auth/
+│   │   ├───employee/
+│   │   ├───guest/
+│   │   ├───misc/
+│   │   ├───reports/
+│   │   └───shared/
+│   ├───styles
+│   │    ├───globals.css
+│   │    ├───tailwind.css
+│   │
+│   └───utils
+│
+└── README.md
+```
+
+# 🏨 Luxury Resort – Modern UI (Tailwind CSS v4)
+
+A sophisticated, high-performance UI kit designed for luxury resort management. This project focuses on a clean, modern aesthetic with a "CSS-first" approach using Tailwind CSS v4.
+
+---
+
+## 🎨 Design Theme & Identity
+
+Our design philosophy centers on elegance, relaxation, and intuitive navigation.
+
+### Color Palette
+| Name | Hex Code | Usage |
+| :--- | :--- | :--- |
+| **Ocean Blue** | `#22b9e7` | Primary brand color, links |
+| **Deep Teal** | `#0c4855` | Headers, deep backgrounds |
+| **Coral Accent** | `#ff5f95` | Call-to-actions, highlights |
+| **Soft White** | `#f9fafb` | Main backgrounds, cards |
+| **Dark Slate** | `#1f2937` | Primary text, footer |
+
+### Design Principles
+* **Soft Shadows:** Depth without harshness (`shadow-lg`).
+* **Rounded Cards:** Friendly, modern corners (`rounded-2xl`).
+* **Gradient Buttons:** Premium feel (Ocean Blue to Deep Teal).
+* **Clean Spacing:** Breathing room for luxury content.
+* **Minimal Clutter:** Focus on task-oriented UI.
+
+---
+
+## Tailwind CSS v4 Configuration
+This project utilizes the native CSS-first configuration of Tailwind v4, removing the need for a `tailwind.config.js` or PostCSS setup.
+
+**Styles Entry Point:** `src/styles/tailwind.css`
+```css
+@import "tailwindcss";
+
+/* Custom theme variables can be added here */
+@theme {
+  --color-ocean: #22b9e7;
+  --color-teal: #0c4855;
+  --color-coral: #ff5f95;
+}
+```
+### Main Entry Point: src/main.jsx
+`import "./styles/tailwind.css";` to use tailwind css
+
+## 🚀 Running the Project
+Install dependencies:
+
+### Bash
+`npm install
+Start development server:`
+
+### Bash
+`npm run dev`
