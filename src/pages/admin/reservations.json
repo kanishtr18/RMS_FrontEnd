@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "header": "Room 204 · John Doe",
+    "type": "Deluxe",
+    "status": "Confirmed",
+    "target": "2025-03-20",
+    "limit": "2025-03-23",
+    "reviewer": "Front Desk"
+  },
+  {
+    "id": 2,
+    "header": "Villa 3 · Emma Stone",
+    "type": "Villa",
+    "status": "Checked In",
+    "target": "2025-03-19",
+    "limit": "2025-03-25",
+    "reviewer": "Manager"
+  }
+]

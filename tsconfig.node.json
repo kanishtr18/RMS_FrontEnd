@@ -12,7 +12,9 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "composite": true,        // Required for project references
+    "noEmit": false,         // Referenced projects may NOT disable emit
+    "emitDeclarationOnly": true,
 
     /* Linting */
     "strict": true,

@@ -8,6 +8,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
-  }
+    },
+    "types": ["node"],
+    "allowJs": true,
+    "jsx": "react"
+  },
+  "include": ["src/**/*"]
 }

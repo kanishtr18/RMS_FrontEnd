@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "header": "RES-2025-001",
+    "type": "Deluxe Room",
+    "status": "Done",
+    "target": "₹18,000",
+    "limit": "2 Nights",
+    "reviewer": "Front Desk"
+  },
+  {
+    "id": 2,
+    "header": "RES-2025-002",
+    "type": "Suite",
+    "status": "In Progress",
+    "target": "₹42,000",
+    "limit": "3 Nights",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 3,
+    "header": "RES-2025-003",
+    "type": "Standard Room",
+    "status": "Done",
+    "target": "₹9,500",
+    "limit": "1 Night",
+    "reviewer": "Front Desk"
+  },
+  {
+    "id": 4,
+    "header": "RES-2025-004",
+    "type": "Villa",
+    "status": "In Progress",
+    "target": "₹75,000",
+    "limit": "4 Nights",
+    "reviewer": "Manager"
+  },
+  {
+    "id": 5,
+    "header": "RES-2025-005",
+    "type": "Deluxe Room",
+    "status": "Not Started",
+    "target": "₹16,500",
+    "limit": "2 Nights",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 6,
+    "header": "RES-2025-006",
+    "type": "Suite",
+    "status": "Done",
+    "target": "₹38,000",
+    "limit": "2 Nights",
+    "reviewer": "Billing Team"
+  },
+  {
+    "id": 7,
+    "header": "RES-2025-007",
+    "type": "Standard Room",
+    "status": "In Progress",
+    "target": "₹11,000",
+    "limit": "1 Night",
+    "reviewer": "Front Desk"
+  },
+  {
+    "id": 8,
+    "header": "RES-2025-008",
+    "type": "Pool Villa",
+    "status": "Done",
+    "target": "₹92,000",
+    "limit": "3 Nights",
+    "reviewer": "Manager"
+  },
+  {
+    "id": 9,
+    "header": "RES-2025-009",
+    "type": "Deluxe Room",
+    "status": "Not Started",
+    "target": "₹19,800",
+    "limit": "2 Nights",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 10,
+    "header": "RES-2025-010",
+    "type": "Suite",
+    "status": "Done",
+    "target": "₹46,500",
+    "limit": "3 Nights",
+    "reviewer": "Billing Team"
+  }
+]
