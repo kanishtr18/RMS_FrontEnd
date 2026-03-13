@@ -8,7 +8,8 @@ import { SectionCards } from "@/components/admin/section-cards"
 import { AreaAnalyticsChart } from "@/components/admin/chart-area-interactive"
 import { QuickActions } from "@/components/admin/QuickActions"
 import { AlertsPanel } from "@/components/admin/alerts-panel"
-import DataTable from "@/components/admin/data-table"
+import RoomTypeEditor from "@/components/admin/roomtype/editor"
+import RoomTypeTable from "@/components/admin/roomtype/table"
 
 import {
   Card,
@@ -20,18 +21,12 @@ import {
 } from "@/components/ui/card"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter, DrawerClose } from "@/components/ui/drawer"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
 
 import {
   IconBed,
   IconPlus,
-  IconPencil,
-  IconTrash,
   IconBuildingSkyscraper,
 } from "@tabler/icons-react"
 
@@ -93,190 +88,6 @@ const roomTypeSchema = z.object({
 // ---------------------------
 const formatCurrencyINR = (n) =>
   Number(n ?? 0).toLocaleString("en-IN", { style: "currency", currency: "INR" })
-
-const formatDateShort = (iso) =>
-  iso ? new Date(iso).toLocaleDateString("en-IN", { month: "short", day: "numeric", year: "numeric" }) : "-"
-
-// ---------------------------
-// RoomType Editor Drawer (Create / Edit)
-// ---------------------------
-function RoomTypeEditor({ open, setOpen, initial, onSave }) {
-  // initial: object (for edit) or null (create)
-  const isEdit = !!initial
-  const [form, setForm] = React.useState(() => ({
-    id: initial?.id ?? `rt-${Math.random().toString(36).slice(2, 9)}`,
-    name: initial?.name ?? "",
-    baseRate: initial?.baseRate ?? 0,
-    bedType: initial?.bedType ?? "",
-    areaSqFt: initial?.areaSqFt ?? "",
-    amenitiesSummary: initial?.amenitiesSummary ?? "",
-    maxOccupancy: initial?.maxOccupancy ?? 1,
-    totalKeys: initial?.totalKeys ?? 0,
-  }))
-
-  React.useEffect(() => {
-    // when initial changes, re-init form
-    setForm({
-      id: initial?.id ?? `rt-${Math.random().toString(36).slice(2, 9)}`,
-      name: initial?.name ?? "",
-      baseRate: initial?.baseRate ?? 0,
-      bedType: initial?.bedType ?? "",
-      areaSqFt: initial?.areaSqFt ?? "",
-      amenitiesSummary: initial?.amenitiesSummary ?? "",
-      maxOccupancy: initial?.maxOccupancy ?? 1,
-      totalKeys: initial?.totalKeys ?? 0,
-    })
-  }, [initial, open])
-
-  const submit = () => {
-    // basic client validation
-    const result = roomTypeSchema.safeParse({
-      ...form,
-      baseRate: Number(form.baseRate),
-      areaSqFt: form.areaSqFt ? Number(form.areaSqFt) : undefined,
-      maxOccupancy: form.maxOccupancy ? Number(form.maxOccupancy) : undefined,
-      totalKeys: form.totalKeys ? Number(form.totalKeys) : undefined,
-    })
-
-    if (!result.success) {
-      const first = result.error.errors[0]
-      toast.error(first?.message ?? "Validation error")
-      return
-    }
-
-    onSave(result.data)
-    setOpen(false)
-  }
-
-  return (
-    <Drawer open={open} onOpenChange={setOpen} direction="right">
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>{isEdit ? "Edit Room Type" : "Create Room Type"}</DrawerTitle>
-        </DrawerHeader>
-
-        <div className="px-4 pb-6 space-y-4">
-          <div>
-            <Label>Name</Label>
-            <Input value={form.name} onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))} placeholder="e.g. Deluxe King" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <Label>Base Rate (INR)</Label>
-              <Input type="number" value={form.baseRate} onChange={(e) => setForm((s) => ({ ...s, baseRate: e.target.value }))} />
-            </div>
-            <div>
-              <Label>Bed Type</Label>
-              <Input value={form.bedType} onChange={(e) => setForm((s) => ({ ...s, bedType: e.target.value }))} placeholder="King / Twin / Sofa bed" />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <Label>Area (sq ft)</Label>
-              <Input type="number" value={form.areaSqFt} onChange={(e) => setForm((s) => ({ ...s, areaSqFt: e.target.value }))} />
-            </div>
-            <div>
-              <Label>Max Occupancy</Label>
-              <Input type="number" value={form.maxOccupancy} onChange={(e) => setForm((s) => ({ ...s, maxOccupancy: e.target.value }))} />
-            </div>
-            <div>
-              <Label>Total Keys</Label>
-              <Input type="number" value={form.totalKeys} onChange={(e) => setForm((s) => ({ ...s, totalKeys: e.target.value }))} />
-            </div>
-          </div>
-
-          <div>
-            <Label>Amenities summary</Label>
-            <Input value={form.amenitiesSummary} onChange={(e) => setForm((s) => ({ ...s, amenitiesSummary: e.target.value }))} placeholder="Comma separated short list" />
-          </div>
-
-          <Separator />
-
-          <div className="flex gap-2">
-            <Button onClick={submit}>{isEdit ? "Save changes" : "Create room type"}</Button>
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </div>
-        </div>
-
-        <DrawerFooter />
-      </DrawerContent>
-    </Drawer>
-  )
-}
-
-// ---------------------------
-// RoomType Table wrapper using DataTable
-// ---------------------------
-function RoomTypeTable({ roomTypes, onEdit, onDelete }) {
-  const columns = [
-    {
-      accessorKey: "name",
-      header: "Name",
-      cell: ({ row }) => (
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-md bg-muted flex items-center justify-center">
-            <IconBed className="size-4" />
-          </div>
-          <div>
-            <div className="font-medium">{row.original.name}</div>
-            <div className="text-xs text-muted-foreground">{row.original.amenitiesSummary}</div>
-          </div>
-        </div>
-      ),
-      enableHiding: false,
-    },
-    {
-      accessorKey: "baseRate",
-      header: "Base Rate",
-      cell: ({ row }) => <div className="font-semibold">{formatCurrencyINR(row.original.baseRate)}</div>,
-    },
-    {
-      accessorKey: "bedType",
-      header: "Bed Type",
-    },
-    {
-      accessorKey: "areaSqFt",
-      header: "Area (sq ft)",
-    },
-    {
-      accessorKey: "maxOccupancy",
-      header: "Max occ.",
-      cell: ({ row }) => <div className="text-center font-medium">{row.original.maxOccupancy}</div>,
-    },
-    {
-      accessorKey: "totalKeys",
-      header: "Keys",
-      cell: ({ row }) => <div className="text-center">{row.original.totalKeys ?? "-"}</div>,
-    },
-    {
-      accessorKey: "createdAt",
-      header: "Created",
-      cell: ({ row }) => formatDateShort(row.original.createdAt),
-    },
-    {
-      id: "actions",
-      header: "Actions",
-      cell: ({ row }) => (
-        <div className="flex gap-2">
-          <Button size="sm" variant="outline" onClick={() => onEdit(row.original)}>
-            <IconPencil className="size-4" />
-            <span className="sr-only">Edit</span>
-          </Button>
-          <Button size="sm" variant="destructive" onClick={() => onDelete(row.original)}>
-            <IconTrash className="size-4" />
-            <span className="sr-only">Delete</span>
-          </Button>
-        </div>
-      ),
-    },
-  ]
-
-  return <DataTable data={roomTypes} columns={columns} initialPageSize={10} idSeed="roomtypes" />
-}
 
 // ---------------------------
 // Page: Room Type Management
@@ -409,10 +220,6 @@ export default function RoomTypeManagementPage() {
               <CardContent>
                 <RoomTypeTable roomTypes={roomTypes} onEdit={handleEdit} onDelete={handleDelete} />
               </CardContent>
-
-              <CardFooter>
-                <div className="text-sm text-muted-foreground">Tip: integrate with your API for persistence</div>
-              </CardFooter>
             </Card>
           </div>
         </div>

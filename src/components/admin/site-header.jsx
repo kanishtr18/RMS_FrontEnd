@@ -1,6 +1,7 @@
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
+import { ModeToggle } from "@/components/mode-toggle"
 
 export function SiteHeader({
   title = "Admin Dashboard",
@@ -33,6 +34,9 @@ export function SiteHeader({
         {/* Right section */}
         <div className="ml-auto flex items-center gap-3">
 
+          <div className="flex items-center gap-2">
+            <ModeToggle />
+          </div>
           {statusLabel && (
             <Badge variant="outline" className="text-xs">
               {statusLabel}

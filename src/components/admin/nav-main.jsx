@@ -30,6 +30,9 @@ export function NavMain({
     data-[active=true]:active:bg-primary/90
     data-[active=true]:active:text-primary-foreground
     data-[active=true]:text-primary-foreground
+
+    px-3
+    py-4.5
   `
 
   return (
